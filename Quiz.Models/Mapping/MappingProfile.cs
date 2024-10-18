@@ -8,8 +8,8 @@ namespace Quiz.Models.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<QuestionDTO, Question>();
-            CreateMap<QuestionaryDTO, Questionary>();
+            CreateMap<QuestionDTO, Question>().ReverseMap();
+            CreateMap<QuestionaryDTO, Questionary>().ReverseMap();
         }
     }
 }
