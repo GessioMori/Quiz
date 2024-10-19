@@ -35,6 +35,7 @@ namespace Quiz.Models.Tests.Mapping
             Assert.Equal(questionDTO.Text, question.Text);
             Assert.Equal(questionDTO.Alternatives, question.Alternatives);
             Assert.Equal(questionDTO.CorrectAlternative, question.CorrectAlternative);
+            Assert.NotEqual(Guid.Empty, question.Id);
         }
 
         [Fact]
@@ -60,6 +61,7 @@ namespace Quiz.Models.Tests.Mapping
             Assert.Equal(questionaryDTO.Title, questionary.Title);
             Assert.Equal(questionaryDTO.IsAvailable, questionary.IsAvailable);
             Assert.Equal(questionaryDTO.Questions.Count, questionary.Questions.Count);
+            Assert.NotEqual(Guid.Empty, questionary.Id);
 
             QuestionDTO firstQuestionDTO = questionaryDTO.Questions[0];
             Question firstQuestion = questionary.Questions[0];
