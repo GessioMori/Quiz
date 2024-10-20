@@ -14,6 +14,12 @@ namespace Quiz.Models.Mapping
             CreateMap<QuestionaryDTO, Questionary>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
                 .ReverseMap();
+            CreateMap<QuestionDTO, QuestionAnswer>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+                .ReverseMap();
+            CreateMap<QuestionaryAnswerDTO, QuestionaryAnswer>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+                .ReverseMap();
         }
     }
 }

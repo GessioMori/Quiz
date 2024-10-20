@@ -14,7 +14,8 @@ namespace Quiz.Infra.Register.ClassMap
                 {
                     cm.AutoMap();
                     cm.MapMember(c => c.Title).SetIsRequired(true);
-                    cm.MapMember(c => c.Questions).SetIsRequired(true);
+                    cm.MapMember(c => c.Questions)
+                        .SetIsRequired(true);
                     cm.MapMember(c => c.IsAvailable).SetIsRequired(true);
                     cm.MapMember(c => c.CreatedAt).SetIsRequired(true);
                 });

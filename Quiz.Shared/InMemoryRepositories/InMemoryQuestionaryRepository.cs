@@ -17,6 +17,16 @@ namespace Quiz.Shared.InMemoryRepositories
             return Task.FromResult(this._questionaries.ToList());
         }
 
+        public Task<List<QuestionaryAnswer>> GetQuestionaryAnswersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task InsertQuestionaryAnswerAsync(QuestionaryAnswer questionaryAnswer)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task InsertQuestionaryAsync(Questionary questionary)
         {
             questionary.Id = Guid.NewGuid();

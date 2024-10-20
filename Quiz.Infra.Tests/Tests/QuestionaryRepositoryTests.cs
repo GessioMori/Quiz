@@ -22,24 +22,7 @@ namespace Quiz.Infra.Tests.Tests
         [Fact]
         public async Task InsertQuestionaryAsync_ShouldInsertAndRetrieveQuestionary()
         {
-            string questionaryTitle = Guid.NewGuid().ToString();
-
-            Questionary questionary = new()
-            {
-                Title = questionaryTitle,
-                Questions =
-                [
-                    new Question
-                    {
-                        Id = Guid.NewGuid(),
-                        Text = "Sample Question?",
-                        Alternatives = ["A", "B", "C", "D"],
-                        CorrectAlternative = 1
-                    }
-                ],
-                IsAvailable = true,
-                CreatedAt = DateTime.UtcNow
-            };
+            (string questionaryTitle, Questionary questionary) = CreateQuestionary();
 
             await this._questionaryRepository.InsertQuestionaryAsync(questionary);
             List<Questionary> result = await this._questionaryRepository.GetAllQuestionariesAsync();
@@ -49,6 +32,63 @@ namespace Quiz.Infra.Tests.Tests
             Assert.NotNull(found);
             Assert.NotEqual(Guid.Empty, found.Id);
             Assert.Equal(questionaryTitle, found.Title);
+        }
+
+        [Fact]
+        public async Task InsertQuestionaryAnswerAsync_ShouldInsertAndRetrieveQuestionaryAnswer()
+        {
+            (string _, Questionary questionary) = CreateQuestionary();
+            await this._questionaryRepository.InsertQuestionaryAsync(questionary);
+
+            const int answerIndex = 2;
+
+            QuestionaryAnswer questionaryAnswer = new()
+            {
+                QuestionaryId = questionary.Id,
+                CreatedAt = DateTime.UtcNow,
+                Answers = [new QuestionAnswer() { Answer = answerIndex, QuestionId = questionary.Questions[0].Id }]
+            };
+
+            await this._questionaryRepository.InsertQuestionaryAnswerAsync(questionaryAnswer);
+
+            List<QuestionaryAnswer> result = await this._questionaryRepository.GetQuestionaryAnswersAsync();
+
+            QuestionaryAnswer? found = result.FirstOrDefault(qa => qa.QuestionaryId == questionary.Id);
+
+            Assert.Multiple(() =>
+            {
+                Assert.NotNull(found);
+                Assert.NotEqual(Guid.Empty, found.Id);
+
+                QuestionAnswer? questionAnswer = found.Answers
+                    .FirstOrDefault(a => a.QuestionId == questionary.Questions[0].Id);
+
+                Assert.NotNull(questionAnswer);
+                Assert.Equal(answerIndex, questionAnswer.Answer);
+            });
+        }
+
+        private (string, Questionary) CreateQuestionary()
+        {
+            string questionaryTitle = Guid.NewGuid().ToString();
+
+            Questionary questionary = new()
+            {
+                Title = questionaryTitle,
+                Questions =
+                [
+                    new Question
+                    {
+                        Text = "Sample Question?",
+                        Alternatives = ["A", "B", "C", "D"],
+                        CorrectAlternative = 1
+                    }
+                ],
+                IsAvailable = true,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            return (questionaryTitle, questionary);
         }
     }
 }
