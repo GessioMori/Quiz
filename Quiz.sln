@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.Models.Tests", "Quiz.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Infra.Tests", "Quiz.Infra.Tests\Quiz.Infra.Tests.csproj", "{FBA31C27-D6A4-4BCC-B2ED-EE2651D8E4FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Services.Tests", "Quiz.Services.Tests\Quiz.Services.Tests.csproj", "{94BDF608-FA7A-4E68-8057-83DDEDD8AC91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{FBA31C27-D6A4-4BCC-B2ED-EE2651D8E4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBA31C27-D6A4-4BCC-B2ED-EE2651D8E4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBA31C27-D6A4-4BCC-B2ED-EE2651D8E4FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94BDF608-FA7A-4E68-8057-83DDEDD8AC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94BDF608-FA7A-4E68-8057-83DDEDD8AC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94BDF608-FA7A-4E68-8057-83DDEDD8AC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94BDF608-FA7A-4E68-8057-83DDEDD8AC91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

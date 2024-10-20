@@ -47,6 +47,7 @@ namespace Quiz.Infra.Tests.Tests
             Questionary? found = result.FirstOrDefault(q => q.Title == questionaryTitle);
 
             Assert.NotNull(found);
+            Assert.NotEqual(Guid.Empty, found.Id);
             Assert.Equal(questionaryTitle, found.Title);
         }
     }
