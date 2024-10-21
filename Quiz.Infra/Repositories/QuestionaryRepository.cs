@@ -27,15 +27,6 @@ namespace Quiz.Infra.Repositories
 
         public async Task InsertQuestionaryAnswerAsync(QuestionaryAnswer questionaryAnswer)
         {
-            Questionary questionary = await this._questionaryCollection
-                .Find(q => q.Id == questionaryAnswer.QuestionaryId)
-                .FirstOrDefaultAsync();
-
-            if (questionary == null)
-            {
-                throw new ArgumentException();
-            }
-
             await this._questionaryAnswerCollection.InsertOneAsync(questionaryAnswer);
         }
 
@@ -44,6 +35,13 @@ namespace Quiz.Infra.Repositories
             return await this._questionaryAnswerCollection
                 .Find(FilterDefinition<QuestionaryAnswer>.Empty)
                 .ToListAsync();
+        }
+
+        public async Task<Questionary?> GetQuestionaryByIdAsync(Guid id)
+        {
+            return await this._questionaryCollection
+                .Find(Builders<Questionary>.Filter.Eq("_id", id))
+                .FirstOrDefaultAsync();
         }
     }
 }

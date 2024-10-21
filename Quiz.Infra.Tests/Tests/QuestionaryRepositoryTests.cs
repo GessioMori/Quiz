@@ -18,7 +18,6 @@ namespace Quiz.Infra.Tests.Tests
             this._questionaryRepository = dbFixture.ServiceProvider.GetRequiredService<IQuestionaryRepository>();
         }
 
-
         [Fact]
         public async Task InsertQuestionaryAsync_ShouldInsertAndRetrieveQuestionary()
         {

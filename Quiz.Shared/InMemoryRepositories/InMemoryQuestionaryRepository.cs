@@ -6,10 +6,12 @@ namespace Quiz.Shared.InMemoryRepositories
     public class InMemoryQuestionaryRepository : IQuestionaryRepository
     {
         private readonly List<Questionary> _questionaries;
+        private readonly List<QuestionaryAnswer> _questionaryAnswers;
 
         public InMemoryQuestionaryRepository()
         {
             this._questionaries = [];
+            this._questionaryAnswers = [];
         }
 
         public Task<List<Questionary>> GetAllQuestionariesAsync()
@@ -19,17 +21,22 @@ namespace Quiz.Shared.InMemoryRepositories
 
         public Task<List<QuestionaryAnswer>> GetQuestionaryAnswersAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(this._questionaryAnswers.ToList());
+        }
+
+        public Task<Questionary?> GetQuestionaryByIdAsync(Guid id)
+        {
+            return Task.FromResult(this._questionaries.FirstOrDefault(q => q.Id == id));
         }
 
         public Task InsertQuestionaryAnswerAsync(QuestionaryAnswer questionaryAnswer)
         {
-            throw new NotImplementedException();
+            this._questionaryAnswers.Add(questionaryAnswer);
+            return Task.CompletedTask;
         }
 
         public Task InsertQuestionaryAsync(Questionary questionary)
         {
-            questionary.Id = Guid.NewGuid();
             this._questionaries.Add(questionary);
             return Task.CompletedTask;
         }

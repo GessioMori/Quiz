@@ -32,5 +32,29 @@ namespace Quiz.Services.Services
         {
             return await this._questionaryRepository.GetAllQuestionariesAsync();
         }
+
+        public async Task CreateQuestionaryAnswerAsync(QuestionaryAnswerDTO questionaryAnswerDTO)
+        {
+            Questionary? questionary = await this._questionaryRepository
+                .GetQuestionaryByIdAsync(questionaryAnswerDTO.QuestionaryId);
+
+            if (questionary == null ||
+                !new HashSet<Guid>(questionary.Questions.Select(q => q.Id))
+                    .SetEquals(questionaryAnswerDTO.Answers.Select(a => a.QuestionId)))
+            {
+                throw new ArgumentException();
+            }
+
+            QuestionaryAnswer questionaryAnswer = this._mapper.Map<QuestionaryAnswer>(questionaryAnswerDTO);
+
+            questionaryAnswer.CreatedAt = DateTime.UtcNow;
+
+            await this._questionaryRepository.InsertQuestionaryAnswerAsync(questionaryAnswer);
+        }
+
+        public async Task<List<QuestionaryAnswer>> GetQuestionaryAnswersAsync()
+        {
+            return await this._questionaryRepository.GetQuestionaryAnswersAsync();
+        }
     }
 }

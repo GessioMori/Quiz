@@ -7,5 +7,7 @@ namespace Quiz.Shared.Interfaces.Services
     {
         Task CreateQuestionaryAsync(QuestionaryDTO questionaryDTO);
         Task<List<Questionary>> GetAllQuestionariesAsync();
+        Task CreateQuestionaryAnswerAsync(QuestionaryAnswerDTO questionaryAnswerDTO);
+        Task<List<QuestionaryAnswer>> GetQuestionaryAnswersAsync();
     }
 }
